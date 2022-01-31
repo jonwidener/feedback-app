@@ -1,7 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { useContext } from 'react';
+import PropTypes from 'prop-types';
+import FeedbackContext from '../context/FeedbackContext';
 
-function FeedbackStats({ feedback }) {
+function FeedbackStats() {
+  const { feedback } = useContext(FeedbackContext);
+
   // Calculate ratings avg
   const average = (
     feedback.reduce((acc, cur) => {
@@ -9,10 +12,10 @@ function FeedbackStats({ feedback }) {
     }, 0) / feedback.length
   )
     .toFixed(1)
-    .replace(/[.,]0$/, "");
+    .replace(/[.,]0$/, '');
 
   return (
-    <div className="feedback-stats">
+    <div className='feedback-stats'>
       <h4>{feedback.length} Reviews</h4>
       <h4>Average Rating: {isNaN(average) ? 0 : average}</h4>
     </div>
